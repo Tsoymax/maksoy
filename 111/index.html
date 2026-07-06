@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111827">
+  <title>Maksoy — навигатор</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="preconnect" href="https://tile.openstreetmap.org">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="map" aria-label="Карта"></main>
+
+  <section class="search-shell" aria-label="Поиск места">
+    <form id="searchForm" class="search-bar">
+      <span class="brand" aria-hidden="true">M</span>
+      <input id="searchInput" type="search" placeholder="Куда едем?" autocomplete="off" aria-label="Введите адрес">
+      <button class="icon-button" type="submit" aria-label="Найти">⌕</button>
+    </form>
+    <div id="searchResults" class="search-results" hidden></div>
+  </section>
+
+  <section id="guidance" class="guidance" hidden aria-live="polite">
+    <div class="turn-icon" id="turnIcon">↑</div>
+    <div class="guidance-copy">
+      <strong id="instruction">Следуйте по маршруту</strong>
+      <span id="instructionDistance"></span>
+    </div>
+    <button id="voiceBtn" class="small-button" type="button" aria-label="Выключить голос">🔊</button>
+  </section>
+
+  <div class="map-actions">
+    <button id="favoritesBtn" class="round-button" type="button" aria-label="Сохранённые места">★</button>
+    <button id="reportBtn" class="round-button" type="button" aria-label="Сообщить о событии">!</button>
+    <button id="locateBtn" class="round-button primary" type="button" aria-label="Моё местоположение">◎</button>
+  </div>
+
+  <section id="placePanel" class="bottom-sheet" hidden>
+    <div class="sheet-handle"></div>
+    <div class="place-heading">
+      <div>
+        <span class="eyebrow">Выбранное место</span>
+        <h1 id="placeName">Место не выбрано</h1>
+      </div>
+      <button id="closePanelBtn" class="close-button" type="button" aria-label="Закрыть">×</button>
+    </div>
+    <div id="routeSummary" class="route-summary" hidden>
+      <div><strong id="routeDistance">—</strong><span>расстояние</span></div>
+      <div><strong id="routeTime">—</strong><span>в пути</span></div>
+      <div><strong id="arrivalTime">—</strong><span>прибытие</span></div>
+    </div>
+    <div class="sheet-actions">
+      <button id="routeBtn" class="action-button primary" type="button">Построить маршрут</button>
+      <button id="startBtn" class="action-button primary" type="button" hidden>Начать</button>
+      <button id="saveBtn" class="action-button secondary" type="button">☆ Сохранить</button>
+    </div>
+    <button id="stopBtn" class="text-button danger" type="button" hidden>Завершить маршрут</button>
+  </section>
+
+  <dialog id="favoritesDialog" class="dialog">
+    <div class="dialog-heading"><h2>Сохранённые места</h2><button class="close-button" data-close-dialog type="button">×</button></div>
+    <div id="favoritesList" class="list"></div>
+  </dialog>
+
+  <dialog id="reportDialog" class="dialog">
+    <div class="dialog-heading"><h2>Что случилось?</h2><button class="close-button" data-close-dialog type="button">×</button></div>
+    <p class="dialog-note">Событие сохранится локально на этом устройстве.</p>
+    <div id="reportOptions" class="report-grid">
+      <button type="button" data-report="ДТП" data-icon="⚠">⚠<span>ДТП</span></button>
+      <button type="button" data-report="Ремонт" data-icon="◆">◆<span>Ремонт</span></button>
+      <button type="button" data-report="Полиция" data-icon="●">●<span>Полиция</span></button>
+      <button type="button" data-report="Опасность" data-icon="!">!<span>Опасность</span></button>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
