@@ -35,8 +35,9 @@ button { -webkit-tap-highlight-color: transparent; }
 .search-result span { margin-top: 3px; color: var(--muted); font-size: 13px; }
 
 .guidance {
+  display: none !important;
   position: fixed; z-index: 900; top: max(82px, calc(env(safe-area-inset-top) + 82px)); left: 50%;
-  display: flex; align-items: center; gap: 12px; width: min(500px, calc(100% - 24px)); padding: 12px;
+  align-items: center; gap: 12px; width: min(500px, calc(100% - 24px)); padding: 12px;
   transform: translateX(-50%); border-radius: 18px; color: #fff; background: rgba(17, 24, 39, .95); box-shadow: var(--shadow);
 }
 .turn-icon { display: grid; place-items: center; width: 48px; height: 48px; flex: 0 0 48px; border-radius: 15px; background: var(--blue); font-size: 28px; font-weight: 800; }

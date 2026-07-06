@@ -14,7 +14,7 @@
     route: null,
     navigating: false,
     following: true,
-    voice: true,
+    voice: false,
     lastInstruction: "",
     lastReroute: 0,
     routeRequestId: 0,
