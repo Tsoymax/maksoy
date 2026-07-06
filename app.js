@@ -166,6 +166,11 @@
     if (state.destinationMarker) state.map.removeLayer(state.destinationMarker);
     state.destinationMarker = L.marker([destination.lat, destination.lng]).addTo(state.map).bindPopup(escapeHtml(destination.name));
     state.map.setView([destination.lat, destination.lng], 16, { animate: true });
+    if (state.position) {
+      buildRoute(false);
+    } else {
+      showToast("Ждём GPS, затем нажмите «Построить маршрут».");
+    }
   }
 
   function buildRoute(isReroute) {
@@ -219,7 +224,7 @@
     state.following = true;
     el.startBtn.hidden = true;
     el.stopBtn.hidden = false;
-    el.guidance.hidden = false;
+    el.guidance.hidden = true;
     el.placePanel.hidden = true;
     centerOnUser();
     updateGuidance();
